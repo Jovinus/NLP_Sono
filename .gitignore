@@ -2,3 +2,4 @@
 /result/*csv
 /*.key
 /*.pdf
+*.DS_Store
