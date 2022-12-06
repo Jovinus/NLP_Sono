@@ -288,7 +288,7 @@ degree2label = {
     "Moderate":"Moderate",
     "Moderate to Severe":"Severe",
     "Severe":"Severe",
-}
+    }
 
 ## Fatty Liver Degree 코드 정의
 label2code = {
