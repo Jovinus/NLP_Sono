@@ -1,3 +1,4 @@
+# %%
 import argparse
 import os
 import json
@@ -12,7 +13,7 @@ from transformers import Trainer
 from transformers import TrainingArguments
 
 from utils import DataCollator, MyDataset
-
+# %%
 ## Model 학습을 위한 Argument 정의 
 def define_argparser():
     p = argparse.ArgumentParser()
@@ -48,7 +49,7 @@ def train_model(config, train_dataset, valid_dataset, save_path):
         '|valid| =', len(valid_dataset),
     )
 
-    total_batch_size = config.batch_size_per_device * torch.cuda.device_count()
+    total_batch_size = config.batch_size_per_device #* torch.cuda.device_count()
     n_total_iterations = int(len(train_dataset) / total_batch_size * config.n_epochs)
     n_warmup_steps = int(n_total_iterations * config.warmup_ratio)
 
@@ -65,7 +66,7 @@ def train_model(config, train_dataset, valid_dataset, save_path):
         per_device_eval_batch_size=config.batch_size_per_device,
         warmup_steps=n_warmup_steps,
         weight_decay=0.01,
-        fp16=True,
+        fp16=False,
         logging_steps=n_total_iterations // 100,
         evaluation_strategy='epoch',
         save_strategy='epoch',
@@ -123,7 +124,7 @@ def make_dataset(config, data):
     return train_dataset, valid_dataset
 
 ## Main 함수 정의
-def main():
+def main(config):
     data = pd.read_csv(config.train_fn)
 
     ### Dataset 불러오기
@@ -136,4 +137,4 @@ def main():
 if __name__ == '__main__':
     config = define_argparser()
     
-    main()
+    main(config)

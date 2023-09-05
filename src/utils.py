@@ -10,7 +10,8 @@ class DataCollator():
         self.max_length = max_length
         
     def __call__(self, samples):
-        text = [s['text'] for s in samples]
+        
+        text = [s['input_ids'] for s in samples]
         label = [s['label'] for s in samples]
         
         ### Text(str) 데이터에 Tokenizer 적용
@@ -50,6 +51,6 @@ class MyDataset(Dataset):
         label = str(self.labels[idx])
 
         return {
-            'text': text,
+            'input_ids': text,
             'label': label,
         }
