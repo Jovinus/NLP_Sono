@@ -1,4 +1,5 @@
-/main/model/*
+/src/model/*
+/src/__pycache__
 /result/*csv
 /*.key
 /*.pdf
